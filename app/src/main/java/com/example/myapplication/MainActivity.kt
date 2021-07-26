@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,13 +14,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var submitBtn: Button;
     private lateinit var timeTextView: TextView;
     private lateinit var job: Job;
+    private lateinit var recyclerView:RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         submitBtn = findViewById(R.id.text_activity_submit)
         timeTextView = findViewById(R.id.textactivity_textview)
+        recyclerView = findViewById(R.id.recyclerView)
         initListener()
+
+        val layoutManager = StackLayoutManager(this)
+        val adapter = TestPicAdapter(this)
+        adapter.addData(R.drawable.itest_1)
+        adapter.addData(R.drawable.itest_2)
+        adapter.addData(R.drawable.itest_1)
+        adapter.addData(R.drawable.itest_2)
+        adapter.addData(R.drawable.itest_1)
+        adapter.addData(R.drawable.itest_2)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
     }
 
     fun initListener(){
